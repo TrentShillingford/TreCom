@@ -4,7 +4,8 @@ const open = require('open')
 const mariadb = require('mariadb')
 const upload = require('express-fileupload')
 const app = express()
-const port = 3000
+//const port = 3000 <-- original port 
+let port = process.env.PORT //Heroku port
 const html_dir=__dirname.replace("server","client") //replace my path to path/to/src/client
 const insert_ = require("./CRUD_Scripts/insert_methods");
 const delete_ = require("./CRUD_Scripts/delete_methods");
@@ -18,6 +19,8 @@ app.use(express.static('Profile_Pictures'));
 app.use(express.static('User_info'));
 app.use(express.json());
 app.use(upload());
+
+if (port == null || port == ""){port = 8000;}
 
 // The entry manager for the server. This is for purposes of 'hot' lookup
 // Creatng two structures for both buyers and suppliers
@@ -49,7 +52,7 @@ async function startup() {
   //console.log(entry_lookup)
   //console.log(supplier_entry_manager)
   console.log('Opening TreCom....');
-  open('http://localhost:3000/Home_Page/index.html');
+  open('http://localhost:'+ port +'/Home_Page/index.html');
 }
 
 app.get('/', (req, res) => {
