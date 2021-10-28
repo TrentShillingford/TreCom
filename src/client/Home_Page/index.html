@@ -1,0 +1,310 @@
+<html>
+    <head>
+
+        <meta charset = "UTF-8">
+        <meta meta http-equiv="Content-Type" content="text/html">
+        <meta name="description" content="Welcome to a new eCommerce platform!">
+        <meta name="author" content="Trent Shillingford">
+        <meta name = "keywords" content = "Trecom, eCommerce, shopping">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0"> 
+        <link rel="shortcut icon" href="data:;base64,iVBORw0KGgo=">
+        <title>TreCom Website</title>
+
+        <!--Font for the Title-->
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet"> 
+
+        <!--Font for the form headers-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">  
+        
+        <!--Font for the navigation bar text-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet"> 
+        
+        <!--Custom CSS for the profile page (Using some from registration page)-->    
+        <link href="homeStyle.css" rel="stylesheet">
+
+    </head>
+
+    <body>    
+        
+        <script>
+            window.addEventListener( "pageshow", function ( event ) {
+                var historyTraversal = event.persisted || 
+                                    ( typeof window.performance != "undefined" && 
+                                        window.performance.navigation.type === 2 );
+                if ( historyTraversal ) {
+                    // Handle page restore.
+                    window.location.reload();
+                }
+            });
+
+            //Startup procedure
+            async function startup(){
+                //retrieving the first page data for buyers
+                sessionStorage.setItem("action_item","get_home");
+                let response = await fetch('/home',{method:'POST', body: JSON.stringify(sessionStorage), headers:{'Content-Type' : 'application/json'}});
+                var data = await response.json();
+                
+                //Populate the featured offers section
+                if(Object.keys(data.buyer).length > 0) {
+
+                    let white = 1; let grey = 0;
+                    let newcolor = "";
+
+                    for(const element in data.buyer) {
+
+                        newcolor = (240*grey + 255*white).toString();
+                        
+                        //Clone the buyer entry element and the style
+                        let ent = document.getElementById("sample_buyer_content").cloneNode(true);                            
+
+                        //Then change the display to flex
+                        ent.style.display = "flex";
+                        ent.id = element.toString();
+
+                        //Then fill in the details for the entry to display
+                        //This is the buyer section, so assign entry elements accordingly
+                        //var obj_co = await (await fetch('https://restcountries.eu/rest/v2/alpha/' + data.buyer[element.toString()]['business_country'])).json();
+
+                        var obj_co1 = await (await fetch("http://api.worldbank.org/v2/country/" + data.buyer[element.toString()]['business_country'] + "?format=json")).json();
+
+                        //var obj_co2 = "https://www.countryflags.io/" + data.buyer[element.toString()]['business_country'] + "/flat/64.png"
+
+                        ent.querySelector("#country_entry_pic").src = "https://www.eworldtrade.com/2K19/flags/4x3/" + data.buyer[element.toString()]['business_country'] + ".svg"; // picture of the country
+                        ent.querySelector("#buyer_text").innerHTML = obj_co1['1']['0']['name']; //name of the country
+                        ent.querySelector("#buyer_offer_summary").innerHTML = data.buyer[element.toString()]['request_title'] //Title of the request
+
+                        ent.style.backgroundColor = "rgb(" + newcolor + "," + newcolor + "," + newcolor + ")"
+
+                        white = (white + 1) % 2;
+                        grey = (grey + 1) % 2;
+
+                        //Then check if the element is displayed                            
+                        document.getElementById("content_for_buyers").append(ent);                        
+                    }
+                    
+                }
+
+
+                //Populate the featured products section
+                if(Object.keys(data.supplier).length > 0) {
+
+                    let white = 0; let grey = 1;
+                    let newcolor = "";
+
+                    for(const element in data.supplier) {
+
+                        newcolor = (240*grey + 255*white).toString();
+                        
+                        //Clone the supplier entry element and the style
+                        let ent = document.getElementById("sample_supplier_content").cloneNode(true);                            
+
+                        //Then change the display to flex
+                        ent.style.display = "flex"
+                        ent.classList.add("supplier_content")
+                        ent.id = element.toString();
+
+                        //Then fill in the details for the entry to display
+                        //This is the supplier section, so assign entry elements accordingly
+                        //var obj_co = await (await fetch('https://restcountries.eu/rest/v2/alpha/' + data.supplier[element.toString()]['business_country'])).json();
+                        var obj_co2 = "https://www.countryflags.io/" + data.supplier[element.toString()]['business_country'] + "/flat/64.png"
+
+                        ent.querySelector("#supplier_country_flag_icon").src = "https://www.eworldtrade.com/2K19/flags/4x3/" + data.supplier[element.toString()]['business_country'] + ".svg"; // picture of the country
+                        ent.querySelector("#supplier_product_title").innerHTML = data.supplier[element.toString()]['product_title'] //Title of the reuest
+                        ent.querySelector("#supplier_product_company").innerHTML = data.supplier[element.toString()]['company_name'] //Title of the request
+                        
+                        ent.style.backgroundColor = "rgb(" + newcolor + "," + newcolor + "," + newcolor + ")"
+
+                        ent.querySelector("#supplier_product_company").style['webkit-text-fill-color'] = "";
+
+                        white = (white + 1) % 2;
+                        grey = (grey + 1) % 2;
+
+                        //Then check if the element is displayed                            
+                        document.getElementById("content_for_suppliers").append(ent);     
+                    }
+
+                }
+
+                
+                if (sessionStorage.getItem('session_id') != null) {
+                    //Then show the profile option in the dropdown, change "login" to "logout", and hide the "register" option
+                    document.getElementById("profilepage_profilebuttondropdown").style.display = "";
+                    document.getElementById("login_profilebuttondropdown").innerHTML = "Logout";
+                    document.getElementById("register_profilebuttondropdown").style.display = "none";
+                }
+                //display(data.content);
+            }
+        </script>
+        
+        <nav>
+            <div class="nav-spacing">
+                <span class="heading">TreCom</span>
+                <span class="nav-text">
+                    <b>
+                        <span class="navlink"><a href="#">About</a></span>
+                        <span class="navlink"><a href="../Home_Page/index.html">Home</a></span>
+                        <span class="navlink"><a href="../Buyer_Page/buyer.html">Buyers</a></span>
+                        <span class="navlink"><a href="../Supplier_Page/supplier.html">Suppliers</a></span>
+                    </b> 
+                    <a>
+                        <img src="/profile_pic_placeholder.png" onerror="this.src = '../../../src/server/Profile_Pictures/profile_pic_placeholder.png';" class="profilepicture profile_pic_hovering">
+                        <img src="/imageonline-co-invertedimage.png" onerror="this.src = '../../../src/server/Profile_Pictures/imageonline-co-invertedimage.png';" class="profilepictureinverted profile_pic_hovering">
+                        <div id="profile_dropdown" style="display: none">
+                            <div id="profilepage_profilebuttondropdown" class="profile_dropdown_options" style="display: none;">Profile</div>
+                            <div id="login_profilebuttondropdown" class="profile_dropdown_options">Login</div>
+                            <div id="register_profilebuttondropdown" class="profile_dropdown_options">Register</div>
+                        </div>
+                    </a>
+                </span>             
+            </div>
+        </nav>
+
+        <div id="searchbar_container">
+            <input type="search" id="searchbar" placeholder="What are you looking for?" required="" value="">
+            <select class="search_buyer_or_supplier">
+                <option value="Supplier">Supplier</option>
+                <option value="Buyer">Buyer</option>
+            </select>
+            <div id="searchbutton"><img src="/white_magnifying_glass.png" onerror="this.src = '../../../src/server/Profile_Pictures/white_magnifying_glass.png';" id="search_glass_icon"></div>
+        </div>
+
+        <div id="products_container">
+
+            <!--Buyer Section-->
+            <div id="featured_buy_offers">
+
+                <!--Container and content for the title of the section-->
+                <div class="featured_title_container">
+                    <div class="featured">Featured Buy Offers</div>
+                    <div class="viewmoretag">-View More-</div>
+                </div>
+                
+                <!--horizontal line here separating title and content-->
+                <div class="hl"></div>
+
+                <!--Section for the actual content (and to append clone tags here)-->
+                <div id="content_for_buyers" class="featured_content">
+
+                    <!--Sample entry for summarized buyer (i.e. element to clone)-->
+                    <div id="sample_buyer_content" style="display: none; height: 40px;">
+
+                        <div id="country_buyer">
+                            <img id="country_entry_pic" src="/item-placeholder.png" onerror="this.src = '../../../src/server/Profile_Pictures/item-placeholder.png';">
+                            <div id="buyer_text">Buyer Country</div>
+                        </div> 
+
+                        <!-- line separating buyer country and buyer title -->
+                        <div id="mini_line_buyer"></div>
+
+                        <div id="buyer_offer_summary">This is an Offer</div>
+
+                    </div>
+                    <!--End of sample entry-->
+
+                </div>
+                
+
+            </div>
+
+            <div id="vl"></div>
+
+            <!--Supplier Section-->
+            <div id="featured_supplier_items">
+
+                <!--Container and content for the title of the section-->
+                <div class="featured_title_container">
+                    <div class="featured">Featured Supplier Items</div>
+                    <div class="viewmoretag" style="margin-left: 58px;">-View More-</div>
+                </div>
+                
+                <!--horizontal line here separating title and content-->
+                <div class="hl"></div>
+
+                <!--Section for the actual content (and to append clone tags here)-->
+                <div id="content_for_suppliers" class="featured_content">
+
+                    <!--Sample entry for summarized supplier (i.e. element to clone)-->
+                    <div id="sample_supplier_content" class="supplier_content" style="display: none; height: 60px;">
+
+                        <div id="supplier_country_flag">
+                            <img id="supplier_country_flag_icon" src="/item-placeholder.png" onerror="this.src = '../../../src/server/Profile_Pictures/item-placeholder.png';">
+                        </div>
+
+                        <div id="supplier_info_container">
+                            <div class="supplier_product_sizing" id="supplier_product_title">Product Title</div>
+                            <div class="supplier_product_sizing special_coloring" id="supplier_product_company">Product Company</div>
+                        </div>
+
+                    </div>
+                    <!--End of sample entry-->
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer></footer>
+
+        <script>
+            document.getElementById("searchbutton").addEventListener("mousedown",function(event){                 
+                //Change the color to red;
+                document.getElementById("searchbutton").style.backgroundColor = "orange";          
+            });
+
+            document.getElementById("searchbutton").addEventListener("mouseup",function(event){                 
+                //Change the color to original color;
+                document.getElementById("searchbutton").style.backgroundColor = "rgb(255, 208, 0)";   
+                
+                //Fire off appropriate event -- TODO
+            });
+
+
+            document.querySelectorAll('.profile_pic_hovering').forEach(item => {
+                item.addEventListener('mouseover', event => {
+                    document.getElementById("profile_dropdown").style.display = "";
+                });
+            });
+
+            document.getElementById("profile_dropdown").addEventListener("mouseleave",function(event){    
+                document.getElementById("profile_dropdown").style.display = "none";
+            });
+
+
+            document.getElementById("profilepage_profilebuttondropdown").addEventListener("click",function(event){    
+                //link to the profile page
+                location.assign("../Profile-Page/profile.html");
+            });
+
+            document.getElementById("login_profilebuttondropdown").addEventListener("click",function(event){    
+                //if the logout option is there, then clear, otherwise, send to login page
+                if(document.getElementById("login_profilebuttondropdown").innerHTML == "Logout"){
+                    //clear the sesstion storage and reload the page; this will remove all user info
+                    sessionStorage.clear();
+                    location.reload(); 
+                    //location.assign("../Supplier_Page/supplier.html");
+                    return;
+                }
+                //if one needs to log in, send them to the login page
+                location.assign("../Login_Page/Login.html");                
+            });
+
+            document.getElementById("register_profilebuttondropdown").addEventListener("click",function(event){    
+                //send to the registration page
+                location.assign("../Registration-Section/Registration.html");
+            });
+
+            //Starting up the system
+            startup();
+        </script>
+    
+    </body>
+
+</html>

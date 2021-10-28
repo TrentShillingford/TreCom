@@ -1,0 +1,161 @@
+html{
+    background: rgb(224, 224, 224); /*linear-gradient(120deg,rgb(0, 217, 255), rgba(255, 208, 0));*/
+    height: auto;
+    width: auto;
+    background-repeat: no-repeat;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+}
+
+body{
+    min-width:inherit;
+    min-height:inherit;
+    margin: 0px;
+    border: 0px;
+    background: rgb(224, 224, 224);
+}  
+
+nav{
+background: linear-gradient(120deg,rgb(0, 217, 255), rgba(255, 208, 0));
+/*background-attachment:fixed !important;*/
+height: 70px;
+width: 1920px;
+background-repeat: no-repeat;
+position: fixed;	   
+opacity: solid;
+z-index: 3;
+}
+
+.heading{
+    font-size: 40px;
+    font-family: Lobster,'Zen Tokyo Zoo', sans-serif;
+    text-shadow: 4px 2px 4px #2c2c2c;
+    /*margin-right: 1584px;*/       
+    color: rgb(255, 255, 255);
+    position: fixed;
+}
+
+.nav-spacing{
+    margin: 10px;
+    margin-top: 7px;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-text{
+    margin-left:525px;
+    margin-top: 15px;   
+    position: fixed !important;
+    white-space: nowrap;
+    color: white;  
+    font-size: 27px;
+    font-family: 'Comfortaa', 'cursive';       
+}     
+
+.navlink {
+    padding-left:55px;
+    padding-right:55px;
+}
+
+.navlink:hover{
+    color:rgb(255, 208, 0, 0.698);
+}
+
+.profilepicture{
+    width: 50px;
+    height: 50px;
+    margin-top: -14px;
+    margin-left: 435px;
+    position:absolute;
+    border: 1px solid rgb(110, 110, 110);
+    border-radius: 40px;
+    transition: opacity 0.25s ease-in-out;
+    z-index: 2;
+}
+
+.profilepictureinverted{
+    width: 50px;
+    height: 50px;
+    margin-top: -14px;
+    margin-left: 435px;
+    position:absolute;
+    border: 1px solid rgb(110, 110, 110);
+    border-radius: 40px;
+    z-index: 1;
+}        
+
+.profilepicture:hover{
+    opacity: 0.0;
+}
+
+#profile_dropdown{
+    background-color: rgb(170, 173, 173);
+    color:black;
+    z-index:10;
+    width:56.35;
+    height:auto;
+    left:1825px;
+    top:70px;
+    position:fixed;
+    padding:10px;
+    border-radius:3px;
+}
+
+.profile_dropdown_options{
+    font-size: 15px ;
+    font-family:'Noto Sans JP',sans-serif !important;
+}
+
+.profile_dropdown_options:hover{
+    color:rgb(63, 188, 238);
+    cursor: pointer;
+}
+
+#entry-section{
+    background-color: white;
+    background-attachment:fixed !important;
+    width: 960px;
+    height: auto;
+    margin-left: 480px;
+    margin-top: 80px;
+    position:absolute !important;
+}
+
+/*************************Contents of the Entry*************************/
+
+#product_photo{
+    width: 200px;
+    height: 200px;
+    margin-left: 380px;
+}
+
+#product_title{
+    font-size: 25px;
+    width:600px;
+    margin: 10px auto 10px 180px;
+    font-family: 'Comfortaa', 'cursive'; 
+    word-wrap: normal;
+    text-align: center;
+}
+
+.product_description{
+    width:940px;
+    margin:10px;
+    height:auto;
+    word-wrap: normal;
+    font-family: 'Comfortaa', 'cursive'; 
+}
+
+#back_button{
+    top: 75px;
+    left: 10px;
+    position: absolute;
+    color:royalblue;
+    cursor: pointer;
+    font-family:'Noto Sans JP',sans-serif; 
+}

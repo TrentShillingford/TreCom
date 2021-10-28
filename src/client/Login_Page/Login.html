@@ -1,0 +1,127 @@
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <meta meta http-equiv="Content-Type" content="text/html">
+    <meta name="description" content="Welcome to a new eCommerce platform!">
+    <meta name="author" content="Trent Shillingford">
+    <meta name = "keywords" content = "Trecom, eCommerce, shopping">
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0"> 
+    <link rel="shortcut icon" href="data:;base64,iVBORw0KGgo=">
+    <title>TreCom Website</title>
+
+    <!--Font for the Title-->
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet"> 
+
+    <!--Font for the form headers-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">    
+
+    <!--Custom stylesheet for login page-->
+    <link href="loginStyle.css" rel="stylesheet">
+</head>
+
+<body>
+    
+    <div class="heading">TreCom</div>
+
+    <!--Login form-->
+
+    <div class="Login">
+    <form id="Login-form" method="POST">
+        
+        <div class="Login-page-header" style="margin-left:171px; margin-right:171px">Login</div> 
+
+        <div class="Login-page-details">Username <span id="username_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span></div>        
+            <input class="Login-page-entry" type="text" id="username_id" placeholder="Username" required>
+
+        <div class="Login-page-details">Password</div>        
+            <input class="Login-page-entry" type="password" id="password_id" placeholder="Password" required><span id="password_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>        
+ 
+        <div class="Login-page-details"></div> 
+            <button form="Login-form" formmethod="post" class="Login-page-entry" style="margin-left:235px" type="submit" ><b>Login</b></button><span id="Login-success" style="color: green; font-size: 15px; font-family:'Noto Sans JP',sans-serif"></span>
+           
+    </form>
+    </div>
+    
+    <script type="text/javascript">
+
+        var Error_Flag=""; // Use an error flag to flag errors in the form
+
+        async function my_async_fn(url) {
+                let response = await fetch(url,{method: 'POST', body: JSON.stringify(form_data), headers:{'Content-Type' : 'application/json'}});
+                var data = await response.json();
+                return data;
+            }      
+
+        is_status_complete = async () => {
+            var status_check = await my_async_fn('/login');
+            if(status_check.statusmsg == "1"){
+                document.getElementById("Login-success").style.color = 'green';
+                document.getElementById("Login-success").innerHTML = "Complete";
+                sessionStorage.setItem('session_id', form_data.Username); // session ID is the username
+                location.replace("../Profile-Page/profile.html");
+            }
+            else{
+                document.getElementById("Login-success").style.color = 'red';
+                document.getElementById("Login-success").innerHTML = "Error"; 
+            }
+            console.log(status_check.statusmsg);
+        }  
+        
+        function ValidateUsername(){
+            var regex = /^[a-zA-Z0-9]+$/; 
+            var ctrl =  document.getElementById("username_id");
+            if((ctrl.value.replaceAll(' ', '') == "") || (ctrl.value.includes(" "))) {return false;}
+            return regex.test(ctrl.value.replaceAll(' ', ''));
+        }
+        
+        var form_data = {  
+            "action_item":"login",   
+            "Username": "",    
+            "Password": ""
+        };
+
+        // Getting the form to check for proper and complete information.
+        document.getElementById("Login-form").addEventListener("submit",function(event){
+
+            event.preventDefault();// Preventing the form submitting immediately            
+            if (document.getElementById("Login-success").innerHTML == "Loading"){return;}// prevent other jobs in eventqueue to process while loading
+            if (document.getElementById("Login-success").innerHTML == "Complete"){return;}// prevent other jobs in eventqueue to process when complete
+            document.getElementById("Login-success").style.color = 'black';
+            document.getElementById("Login-success").innerHTML = "Loading";            
+            Error_Flag=""; //Reset it after every attempted submission
+            
+            /************************** Validation Check on Form Contents ***************************/
+
+            //Validating Username (Only Allowing Alphanumeric Names)
+            if(ValidateUsername()) {
+                form_data.Username = document.getElementById("username_id").value.replaceAll(' ', '');
+                document.getElementById("username_error").innerHTML = "";
+            }
+            else{                
+                document.getElementById("username_error").innerHTML = "Username should only be letters and numbers.";
+                Error_Flag = "Error";
+            }
+
+            if (Error_Flag == "Error"){
+                document.getElementById("Login-success").style.color = 'red';
+                document.getElementById("Login-success").innerHTML = "Error"; 
+                return;
+            }
+            
+            /**************************************** Section End ***********************************/
+
+            form_data.Password = document.getElementById("password_id").value;
+            
+            is_status_complete();	
+
+        });
+       
+    </script>
+    
+</body>
+</html>

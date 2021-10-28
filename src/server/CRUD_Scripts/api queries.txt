@@ -1,0 +1,45 @@
+INSERT INTO user_profile
+       VALUES ('Puffball','Diane','hamster','f','1999-03-30',NULL);
+
+
+CREATE TABLE user_profile (profile_id TEXT, buyer_or_supplier TEXT, contact_name TEXT, company_name TEXT, position_title TEXT, management_grade TEXT, email_id TEXT, phone_id TEXT, business_address TEXT, business_size TEXT, business_revenue TEXT, industry TEXT, username TEXT, profile_password TEXT, online_status TEXT);
+
+"INSERT INTO user_profile
+       VALUES (" +
+determine_insert.Profile_ID + "," +
+determine_insert.Buyer_or_Supplier + "," +
+JSON.stringify(determine_insert.Name) + "," +
+determine_insert.Company_Name + "," +
+determine_insert.Position_Title + "," +
+determine_insert.Management_Grade + "," +
+determine_insert.Email + "," +
+determine_insert.Phone + "," +
+determine_insert.Business_Address + "," +
+determine_insert.Business_Size + "," +
+determine_insert.Business_Revenue + "," +
+determine_insert.Industry + "," +
+determine_insert.Username + "," +
+determine_insert.Password + ","
+"online)"
+
+
+
+INSERT INTO user_profile VALUES (tshillingford1@gmail.com_buyer,buyer,{"First_Name":"Trent","Last_Name":"Shillingford"},American Express,Product Analyst,Analyst,tshillingford1@gmail.com,+18452747961,916 Reymus Ave. Seatle, Mi 65686,70,000,300,000,Information,tshill1,u,online) 
+
+
+ "INSERT INTO someTable VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+	 [determine_insert.Profile_ID, 
+determine_insert.Buyer_or_Supplier, 
+JSON.stringify(determine_insert.Name),
+determine_insert.Company_Name,
+determine_insert.Position_Title,
+determine_insert.Management_Grade,
+determine_insert.Email,
+determine_insert.Phone,
+determine_insert.Business_Address,
+determine_insert.Business_Size,
+determine_insert.Business_Revenue,
+determine_insert.Industry,
+determine_insert.Username,
+determine_insert.Password,
+"online)"]

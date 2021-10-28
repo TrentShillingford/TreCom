@@ -1,0 +1,24 @@
+CREATE DATABASE IF NOT EXISTS trecom_db;
+
+CREATE TABLE IF NOT EXISTS suppliers_table;
+
+
+CREATE TABLE IF NOT EXISTS buyers_table; 
+
+
+CREATE TABLE IF NOT EXISTS user_profile;
+
+
+
+CREATE TABLE user_profile (profile_id TEXT, buyer_or_supplier TEXT, contact_name TEXT, company_name TEXT, position_title TEXT, management_grade TEXT, email_id TEXT, phone_id TEXT,business_address TEXT, business_size TEXT, industry TEXT, username TEXT, profile_password TEXT, online_status TEXT);
+
+
+
+
+CREATE TABLE suppliers_table (profile_id TEXT, username TEXT, contact_name TEXT, company_name TEXT, position_title TEXT, business_address TEXT, business_size TEXT, business_revenue TEXT,industry TEXT, email_id TEXT, phone_id TEXT, product_title TEXT, product_description TEXT, product_location TEXT, shipping_options TEXT, product_pictures TEXT);
+
+
+
+CREATE TABLE buyers_table (profile_id TEXT, contact_name TEXT, company_name TEXT, position_title TEXT, email_id TEXT, phone_id TEXT, business_address TEXT, location_request_from TEXT, send_item_to TEXT, request_title TEXT, request_text TEXT);
+
+

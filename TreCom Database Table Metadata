@@ -1,0 +1,75 @@
+> describe buyers_table;
++-----------------------+------+------+-----+---------+-------+
+| Field                 | Type | Null | Key | Default | Extra |
++-----------------------+------+------+-----+---------+-------+
+| profile_id            | text | YES  |     | NULL    |       |
+| entry_id              | text | YES  |     | NULL    |       |
+| username              | text | YES  |     | NULL    |       |
+| contact_name          | text | YES  |     | NULL    |       |
+| company_name          | text | YES  |     | NULL    |       |
+| position_title        | text | YES  |     | NULL    |       |
+| email_id              | text | YES  |     | NULL    |       |
+| phone_id              | text | YES  |     | NULL    |       |
+| business_address      | text | YES  |     | NULL    |       |
+| business_country      | text | YES  |     | NULL    |       |
+| business_size         | text | YES  |     | NULL    |       |
+| business_revenue      | text | YES  |     | NULL    |       |
+| industry              | text | YES  |     | NULL    |       |
+| location_request_from | text | YES  |     | NULL    |       |
+| send_item_to          | text | YES  |     | NULL    |       |
+| request_title         | text | YES  |     | NULL    |       |
+| request_text          | text | YES  |     | NULL    |       |
++-----------------------+------+------+-----+---------+-------+
+
+--------------------------------------------------------------------------------
+
+> describe suppliers_table;
++---------------------+------+------+-----+---------+-------+
+| Field               | Type | Null | Key | Default | Extra |
++---------------------+------+------+-----+---------+-------+
+| profile_id          | text | YES  |     | NULL    |       |
+| entry_id            | text | YES  |     | NULL    |       |
+| username            | text | YES  |     | NULL    |       |
+| contact_name        | text | YES  |     | NULL    |       |
+| company_name        | text | YES  |     | NULL    |       |
+| position_title      | text | YES  |     | NULL    |       |
+| business_address    | text | YES  |     | NULL    |       |
+| business_country    | text | YES  |     | NULL    |       |
+| business_size       | text | YES  |     | NULL    |       |
+| business_revenue    | text | YES  |     | NULL    |       |
+| industry            | text | YES  |     | NULL    |       |
+| email_id            | text | YES  |     | NULL    |       |
+| phone_id            | text | YES  |     | NULL    |       |
+| product_title       | text | YES  |     | NULL    |       |
+| product_description | text | YES  |     | NULL    |       |
+| product_location    | text | YES  |     | NULL    |       |
+| shipping_options    | text | YES  |     | NULL    |       |
+| product_pictures    | text | YES  |     | NULL    |       |
++---------------------+------+------+-----+---------+-------+
+
+---------------------------------------------------------------------------
+
+> describe user_profile;
++-------------------+------+------+-----+---------+-------+
+| Field             | Type | Null | Key | Default | Extra |
++-------------------+------+------+-----+---------+-------+
+| profile_id        | text | YES  |     | NULL    |       |
+| buyer_or_supplier | text | YES  |     | NULL    |       |
+| contact_name      | text | YES  |     | NULL    |       |
+| company_name      | text | YES  |     | NULL    |       |
+| position_title    | text | YES  |     | NULL    |       |
+| management_grade  | text | YES  |     | NULL    |       |
+| email_id          | text | YES  |     | NULL    |       |
+| phone_id          | text | YES  |     | NULL    |       |
+| business_address  | text | YES  |     | NULL    |       |
+| business_country  | text | YES  |     | NULL    |       |
+| business_size     | text | YES  |     | NULL    |       |
+| business_revenue  | text | YES  |     | NULL    |       |
+| industry          | text | YES  |     | NULL    |       |
+| username          | text | YES  |     | NULL    |       |
+| profile_password  | text | YES  |     | NULL    |       |
+| online_status     | text | YES  |     | NULL    |       |
++-------------------+------+------+-----+---------+-------+
+
+
+

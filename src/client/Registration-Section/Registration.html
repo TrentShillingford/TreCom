@@ -1,0 +1,610 @@
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <meta meta http-equiv="Content-Type" content="text/html">
+    <meta name="description" content="Welcome to a new eCommerce platform!">
+    <meta name="author" content="Trent Shillingford">
+    <meta name = "keywords" content = "Trecom, eCommerce, shopping">
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0"> 
+    <link rel="shortcut icon" href="data:;base64,iVBORw0KGgo=">
+    <title>TreCom Website</title>
+
+    <!--Font for the Title-->
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet"> 
+
+    <!--Font for the form headers-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">    
+
+    <!--Custom Stylesheet for Registration Page-->
+    <link href="registrationStyle.css" rel="stylesheet">
+
+</head>
+
+<body>
+    
+    <div class="heading">Join the TreCom Community</div>
+
+    <!--Registration form-->
+
+    <div class="registration">
+        <form id="registration-form" method="POST">
+            
+            <div class="registration-page-header" style="margin-left:171px; margin-right:171px">Sign Up</div>
+        
+            <div class="registration-page-details"></div>
+            <span class="registration-page-entry" style="margin-right:-30px"><input type="radio" name="Buyer-Supplier" required> Buyer</span>
+            <span class="registration-page-entry"><input type="radio" name="Buyer-Supplier" required> Supplier</span>       
+
+            <div class="registration-page-details">Name</div>         
+                <input class="registration-page-entry" type="text" id="first_name" placeholder="First Name" required><span id="first_nm_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>
+                <input class="registration-page-entry" type="text" id="last_name" placeholder="Last Name" required><span id="last_nm_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>        
+
+            <div class="registration-page-details">Company Name</div>        
+                <input class="registration-page-entry" type="text" id="company_name" placeholder="Company" required><span id="company_nm_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>       
+
+            <div class="registration-page-details">Position Title</div>        
+                <input class="registration-page-entry" type="text" id="position_title" placeholder="Title" required><span id="position_nm_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>        
+            
+            <div class="registration-page-details">Management Grade</div>        
+                <select class="registration-page-entry" name="Management Grade" id="management_grade">
+                    <option value="Select">Select an option...</option>
+                    <option value="C-Suite">C-Suite</option>
+                    <option value="Managing Director">Managing Director</option>
+                    <option value="President">President</option>
+                    <option value="Vice President">Vice President</option>
+                    <option value="Director">Director</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Analyst">Analyst</option>
+                    <option value="Other">Other</option>
+                </select><span id="management_grade_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>
+            
+            <div class="registration-page-details">Email</div>        
+                <input class="registration-page-entry" type="text" id="email_id" placeholder="Email" required><span id="email_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>        
+
+            <div class="registration-page-details">Phone</div>       
+                <input class="registration-page-entry" type="text" id="phone_num" placeholder="Please Include Area Code" required><span id="phone_num_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>       
+
+            <div class="registration-page-details">Business Address <span id="address_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span></div>        
+                <textarea rows="10" class="registration-page-entry" type="text" id="business_address" placeholder="Line, City/Town, State/Province/Region, Country, Postal Code" required></textarea> 
+                
+            <div class="registration-page-details">Country of Business</div>        
+                <select class="registration-page-entry" name="Select_Country" id="business_country">
+                    <option value="Select">Select an option...</option>
+                    <option value="af">Afghanistan</option>
+                    <option value="ax">Åland Islands</option>
+                    <option value="al">Albania</option>
+                    <option value="dz">Algeria</option>
+                    <option value="as">American Samoa</option>
+                    <option value="ad">Andorra</option>
+                    <option value="ao">Angola</option>
+                    <option value="ai">Anguilla</option>
+                    <option value="aq">Antarctica</option>
+                    <option value="ag">Antigua and Barbuda</option>
+                    <option value="ar">Argentina</option>
+                    <option value="am">Armenia</option>
+                    <option value="aw">Aruba</option>
+                    <option value="au">Australia</option>
+                    <option value="at">Austria</option>
+                    <option value="az">Azerbaijan</option>
+                    <option value="bs">Bahamas</option>
+                    <option value="bh">Bahrain</option>
+                    <option value="bd">Bangladesh</option>
+                    <option value="bb">Barbados</option>
+                    <option value="by">Belarus</option>
+                    <option value="be">Belgium</option>
+                    <option value="bz">Belize</option>
+                    <option value="bj">Benin</option>
+                    <option value="bm">Bermuda</option>
+                    <option value="bt">Bhutan</option>
+                    <option value="bo">Bolivia (Plurinational State of)</option>
+                    <option value="bq">Bonaire, Sint Eustatius and Saba[a]</option>
+                    <option value="ba">Bosnia and Herzegovina</option>
+                    <option value="bw">Botswana</option>
+                    <option value="bv">Bouvet Island</option>
+                    <option value="br">Brazil</option>
+                    <option value="io">British Indian Ocean Territory</option>
+                    <option value="bn">Brunei Darussalam</option>
+                    <option value="bg">Bulgaria</option>
+                    <option value="bf">Burkina Faso</option>
+                    <option value="bi">Burundi</option>
+                    <option value="cv">Cabo Verde</option>
+                    <option value="kh">Cambodia</option>
+                    <option value="cm">Cameroon</option>
+                    <option value="ca">Canada</option>
+                    <option value="ky">Cayman Islands</option>
+                    <option value="cf">Central African Republic</option>
+                    <option value="td">Chad</option>
+                    <option value="cl">Chile</option>
+                    <option value="cn">China</option>
+                    <option value="cx">Christmas Island</option>
+                    <option value="cc">Cocos (Keeling) Islands</option>
+                    <option value="co">Colombia</option>
+                    <option value="km">Comoros</option>
+                    <option value="cg">Congo</option>
+                    <option value="cd">Congo, Democratic Republic of the</option>
+                    <option value="ck">Cook Islands</option>
+                    <option value="cr">Costa Rica</option>
+                    <option value="ci">Côte d'Ivoire</option>
+                    <option value="hr">Croatia</option>
+                    <option value="cu">Cuba</option>
+                    <option value="cw">Curaçao</option>
+                    <option value="cy">Cyprus</option>
+                    <option value="cz">Czechia</option>
+                    <option value="dk">Denmark</option>
+                    <option value="dj">Djibouti</option>
+                    <option value="dm">Dominica</option>
+                    <option value="do">Dominican Republic</option>
+                    <option value="ec">Ecuador</option>
+                    <option value="eg">Egypt</option>
+                    <option value="sv">El Salvador</option>
+                    <option value="gq">Equatorial Guinea</option>
+                    <option value="er">Eritrea</option>
+                    <option value="ee">Estonia</option>
+                    <option value="sz">Eswatini</option>
+                    <option value="et">Ethiopia</option>
+                    <option value="fk">Falkland Islands (Malvinas)</option>
+                    <option value="fo">Faroe Islands</option>
+                    <option value="fj">Fiji</option>
+                    <option value="fi">Finland</option>
+                    <option value="fr">France</option>
+                    <option value="gf">French Guiana</option>
+                    <option value="pf">French Polynesia</option>
+                    <option value="tf">French Southern Territories</option>
+                    <option value="ga">Gabon</option>
+                    <option value="gm">Gambia</option>
+                    <option value="ge">Georgia</option>
+                    <option value="de">Germany</option>
+                    <option value="gh">Ghana</option>
+                    <option value="gi">Gibraltar</option>
+                    <option value="gr">Greece</option>
+                    <option value="gl">Greenland</option>
+                    <option value="gd">Grenada</option>
+                    <option value="gp">Guadeloupe</option>
+                    <option value="gu">Guam</option>
+                    <option value="gt">Guatemala</option>
+                    <option value="gg">Guernsey</option>
+                    <option value="gn">Guinea</option>
+                    <option value="gw">Guinea-Bissau</option>
+                    <option value="gy">Guyana</option>
+                    <option value="ht">Haiti</option>
+                    <option value="hm">Heard Island and McDonald Islands</option>
+                    <option value="va">Holy See</option>
+                    <option value="hn">Honduras</option>
+                    <option value="hk">Hong Kong</option>
+                    <option value="hu">Hungary</option>
+                    <option value="is">Iceland</option>
+                    <option value="in">India</option>
+                    <option value="id">Indonesia</option>
+                    <option value="ir">Iran (Islamic Republic of)</option>
+                    <option value="iq">Iraq</option>
+                    <option value="ie">Ireland</option>
+                    <option value="im">Isle of Man</option>
+                    <option value="il">Israel</option>
+                    <option value="it">Italy</option>
+                    <option value="jm">Jamaica</option>
+                    <option value="jp">Japan</option>
+                    <option value="je">Jersey</option>
+                    <option value="jo">Jordan</option>
+                    <option value="kz">Kazakhstan</option>
+                    <option value="ke">Kenya</option>
+                    <option value="ki">Kiribati</option>
+                    <option value="kp">Korea (Democratic People's Republic of)</option>
+                    <option value="kr">Korea, Republic of</option>
+                    <option value="kw">Kuwait</option>
+                    <option value="kg">Kyrgyzstan</option>
+                    <option value="la">Lao People's Democratic Republic</option>
+                    <option value="lv">Latvia</option>
+                    <option value="lb">Lebanon</option>
+                    <option value="ls">Lesotho</option>
+                    <option value="lr">Liberia</option>
+                    <option value="ly">Libya</option>
+                    <option value="li">Liechtenstein</option>
+                    <option value="lt">Lithuania</option>
+                    <option value="lu">Luxembourg</option>
+                    <option value="mo">Macao</option>
+                    <option value="mg">Madagascar</option>
+                    <option value="mw">Malawi</option>
+                    <option value="my">Malaysia</option>
+                    <option value="mv">Maldives</option>
+                    <option value="ml">Mali</option>
+                    <option value="mt">Malta</option>
+                    <option value="mh">Marshall Islands</option>
+                    <option value="mq">Martinique</option>
+                    <option value="mr">Mauritania</option>
+                    <option value="mu">Mauritius</option>
+                    <option value="yt">Mayotte</option>
+                    <option value="mx">Mexico</option>
+                    <option value="fm">Micronesia (Federated States of)</option>
+                    <option value="md">Moldova, Republic of</option>
+                    <option value="mc">Monaco</option>
+                    <option value="mn">Mongolia</option>
+                    <option value="me">Montenegro</option>
+                    <option value="ms">Montserrat</option>
+                    <option value="ma">Morocco</option>
+                    <option value="mz">Mozambique</option>
+                    <option value="mm">Myanmar</option>
+                    <option value="na">Namibia</option>
+                    <option value="nr">Nauru</option>
+                    <option value="np">Nepal</option>
+                    <option value="nl">Netherlands</option>
+                    <option value="nc">New Caledonia</option>
+                    <option value="nz">New Zealand</option>
+                    <option value="ni">Nicaragua</option>
+                    <option value="ne">Niger</option>
+                    <option value="ng">Nigeria</option>
+                    <option value="nu">Niue</option>
+                    <option value="nf">Norfolk Island</option>
+                    <option value="mk">North Macedonia</option>
+                    <option value="mp">Northern Mariana Islands</option>
+                    <option value="no">Norway</option>
+                    <option value="om">Oman</option>
+                    <option value="pk">Pakistan</option>
+                    <option value="pw">Palau</option>
+                    <option value="ps">Palestine, State of</option>
+                    <option value="pa">Panama</option>
+                    <option value="pg">Papua New Guinea</option>
+                    <option value="py">Paraguay</option>
+                    <option value="pe">Peru</option>
+                    <option value="ph">Philippines</option>
+                    <option value="pn">Pitcairn</option>
+                    <option value="pl">Poland</option>
+                    <option value="pt">Portugal</option>
+                    <option value="pr">Puerto Rico</option>
+                    <option value="qa">Qatar</option>
+                    <option value="re">Réunion</option>
+                    <option value="ro">Romania</option>
+                    <option value="ru">Russian Federation</option>
+                    <option value="rw">Rwanda</option>
+                    <option value="bl">Saint Barthélemy</option>
+                    <option value="sh">Saint Helena, Ascension and Tristan da Cunha[b]</option>
+                    <option value="kn">Saint Kitts and Nevis</option>
+                    <option value="lc">Saint Lucia</option>
+                    <option value="mf">Saint Martin (French part)</option>
+                    <option value="pm">Saint Pierre and Miquelon</option>
+                    <option value="vc">Saint Vincent and the Grenadines</option>
+                    <option value="ws">Samoa</option>
+                    <option value="sm">San Marino</option>
+                    <option value="st">Sao Tome and Principe</option>
+                    <option value="sa">Saudi Arabia</option>
+                    <option value="sn">Senegal</option>
+                    <option value="rs">Serbia</option>
+                    <option value="sc">Seychelles</option>
+                    <option value="sl">Sierra Leone</option>
+                    <option value="sg">Singapore</option>
+                    <option value="sx">Sint Maarten (Dutch part)</option>
+                    <option value="sk">Slovakia</option>
+                    <option value="si">Slovenia</option>
+                    <option value="sb">Solomon Islands</option>
+                    <option value="so">Somalia</option>
+                    <option value="za">South Africa</option>
+                    <option value="gs">South Georgia and the South Sandwich Islands</option>
+                    <option value="ss">South Sudan</option>
+                    <option value="es">Spain</option>
+                    <option value="lk">Sri Lanka</option>
+                    <option value="sd">Sudan</option>
+                    <option value="sr">Suriname</option>
+                    <option value="sj">Svalbard and Jan Mayen[c]</option>
+                    <option value="se">Sweden</option>
+                    <option value="ch">Switzerland</option>
+                    <option value="sy">Syrian Arab Republic</option>
+                    <option value="tw">Taiwan, Province of China</option>
+                    <option value="tj">Tajikistan</option>
+                    <option value="tz">Tanzania, United Republic of</option>
+                    <option value="th">Thailand</option>
+                    <option value="tl">Timor-Leste</option>
+                    <option value="tg">Togo</option>
+                    <option value="tk">Tokelau</option>
+                    <option value="to">Tonga</option>
+                    <option value="tt">Trinidad and Tobago</option>
+                    <option value="tn">Tunisia</option>
+                    <option value="tr">Turkey</option>
+                    <option value="tm">Turkmenistan</option>
+                    <option value="tc">Turks and Caicos Islands</option>
+                    <option value="tv">Tuvalu</option>
+                    <option value="ug">Uganda</option>
+                    <option value="ua">Ukraine</option>
+                    <option value="ae">United Arab Emirates</option>
+                    <option value="gb">United Kingdom of Great Britain and Northern Ireland</option>
+                    <option value="us">United States of America</option>
+                    <option value="um">United States Minor Outlying Islands[e]</option>
+                    <option value="uy">Uruguay</option>
+                    <option value="uz">Uzbekistan</option>
+                    <option value="vu">Vanuatu</option>
+                    <option value="ve">Venezuela (Bolivarian Republic of)</option>
+                    <option value="vn">Viet Nam</option>
+                    <option value="vg">Virgin Islands (British)</option>
+                    <option value="vi">Virgin Islands (U.S.)</option>
+                    <option value="wf">Wallis and Futuna</option>
+                    <option value="eh">Western Sahara</option>
+                    <option value="ye">Yemen</option>
+                    <option value="zm">Zambia</option>
+                    <option value="zw">Zimbabwe</option>
+                    <option value="Other">Other</option>
+                </select><span id="country_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>
+
+            <div class="registration-page-details">Business Size</div>      
+                <input class="registration-page-entry" type="text" id="company_size" placeholder="Size" required><span id="business_size_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>        
+
+            <div class="registration-page-details">Business Revenue (Annual)</div>        
+                <input class="registration-page-entry" type="text" id="business_revenue" placeholder="Revenue" required><span id="revenue_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>        
+
+            <div class="registration-page-details">Industry of Business</div>        
+                <select class="registration-page-entry" name="Select" id="business_industry">
+                    <option value="Select">Select an option...</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Mining">Mining</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Construction">Construction</option>
+                    <option value="Manufacturing">Manufacturing</option>
+                    <option value="Trade(Wholesale/Retail)">Trade(Wholesale/Retail)</option>
+                    <option value="Transportation & Warehousing">Transportation & Warehousing</option>
+                    <option value="Information">Information</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Insurance">Insurance</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Science">Science</option>
+                    <option value="Administration">Administration</option>
+                    <option value="Education">Education</option>
+                    <option value="Healthcare/Public Health">Healthcare/Public Health</option>
+                    <option value="Other">Other</option>
+                </select><span id="industry_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>                
+
+            <div class="registration-page-details">Username <span id="username_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span></div>        
+                <input class="registration-page-entry" type="text" id="username_id" placeholder="Username" required>
+
+            <div class="registration-page-details">Password</div>        
+                <input class="registration-page-entry" type="password" id="password_id" placeholder="Password" required><span id="password_error" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>        
+
+            <div class="registration-page-details">Enter Password Again</div>        
+                <input class="registration-page-entry" type="password" id="password_id_again" placeholder="Enter Password Again" required><span id="password_error_again" style="color: red; font-size: 10px; font-family:'Noto Sans JP',sans-serif"></span>
+                
+            <div class="registration-page-details"></div> 
+                <button form="registration-form" formmethod="post" class="registration-page-entry" style="margin-left:222px; margin-right:222px" type="submit" ><b>Submit</b></button><span id="registration-success" style="color: green; font-size: 15px; margin-left:-214px; font-family:'Noto Sans JP',sans-serif"></span>
+            
+        </form>
+    </div>
+    
+    <script type="text/javascript">
+
+        var Error_Flag=""; // Use an error flag to flag errors in the form
+
+        async function my_async_fn(url) {
+                let response = await fetch(url,{method: 'POST',body: JSON.stringify(form_data),headers:{'Content-Type' : 'application/json'}});
+                var data = await response.json();
+                return data;
+            }      
+
+        is_status_complete = async () => {
+            var status_check = await my_async_fn('/register');
+            if(status_check.statusmsg == "db_success"){
+                document.getElementById("registration-success").style.color = 'green';
+                document.getElementById("registration-success").innerHTML = "Complete";
+                location.replace("../Login_Page/Login.html");
+            }
+            else{
+                document.getElementById("registration-success").style.color = 'red';
+                document.getElementById("registration-success").innerHTML = "Error"; 
+            }
+            console.log(status_check.statusmsg);
+        }  
+
+        function voidOnlySpaces(id){
+            if(document.getElementById(id).value.replaceAll(' ', '') == ""){
+                Error_Flag = "Error";
+                return true;
+            }
+            return false;
+        }
+
+        function validatename(id) {            
+            var regex = /^[a-zA-Z ]{2,30}$/;
+            var ctrl =  document.getElementById(id);
+            if(ctrl.value.replaceAll(' ', '') == ""){return false;}
+            return regex.test(ctrl.value);
+        }
+
+        function ValidateEmail(){
+            //This is the IETF RFC2822 Email Validation Regex
+            var emailreg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            var ctrl = document.getElementById("email_id");
+            if((ctrl.value.replaceAll(' ', '') == "") || (ctrl.value.includes(" "))) {return false;}
+            return (emailreg.test(ctrl.value.replaceAll(' ', '')));
+        } 
+        
+        function ValidateUsername(){
+            var regex = /^[a-zA-Z0-9]+$/; 
+            var ctrl =  document.getElementById("username_id");
+            if((ctrl.value.replaceAll(' ', '') == "") || (ctrl.value.includes(" "))) {return false;}
+            return regex.test(ctrl.value.replaceAll(' ', ''));
+        }
+        
+        var form_data = {  
+            "action_item":"register",
+            "Profile_ID":"",  
+            "Buyer_or_Supplier":"",    
+            "Name": {        
+                "First_Name":"",     
+                "Last_Name":""   
+            },    
+            "Company_Name": "",    
+            "Position_Title": "",    
+            "Management_Grade": "",    
+            "Email":"",   
+            "Phone":"",    
+            "Business_Address": "",
+            "Business_Country": "",    
+            "Business_Size": "",    
+            "Business_Revenue": "",    
+            "Industry": "",    
+            "Username": "",    
+            "Password": ""
+        };
+
+        // Getting the form to check for proper and complete information.
+        document.getElementById("registration-form").addEventListener("submit",function(event){
+
+            event.preventDefault();// Preventing the form submitting immediately            
+            if (document.getElementById("registration-success").innerHTML == "Loading"){return;}// prevent other jobs in eventqueue to process while loading
+            if (document.getElementById("registration-success").innerHTML == "Complete"){return;}// prevent other jobs in eventqueue to process when complete
+            document.getElementById("registration-success").style.color = 'black';
+            document.getElementById("registration-success").innerHTML = "Loading";            
+            Error_Flag=""; //Reset it after every attempted submission
+            
+            /************************** Validation Check on Form Contents ***************************/
+            
+            // Adds buyer or supplier based on "checked" attribute designation in the two node objects 
+            form_data.Buyer_or_Supplier = "buyer";
+            if (document.getElementsByName("Buyer-Supplier")[1].checked) { form_data.Buyer_or_Supplier = "supplier"; }
+            
+            // Validating First Name
+            if(validatename("first_name")) {
+                form_data.Name.First_Name = document.getElementById("first_name").value;
+                document.getElementById("first_nm_error").innerHTML = "";
+            }
+            else{                
+                document.getElementById("first_nm_error").innerHTML = "Improper input. Try again.";
+                Error_Flag = "Error";
+            }
+
+            // Validating Last Name
+            if(validatename("last_name")) {
+                form_data.Name.Last_Name = document.getElementById("last_name").value;
+                document.getElementById("last_nm_error").innerHTML = "";
+            }
+            else{                
+                document.getElementById("last_nm_error").innerHTML = "Improper input. Try again.";
+                Error_Flag = "Error";
+            }
+
+            // Validating Management Grade
+            if(document.getElementById("management_grade").value == "Select"){
+                document.getElementById("management_grade_error").innerHTML = "Please choose an option.";
+                Error_Flag = "Error";
+            }
+            else{
+                form_data.Management_Grade = document.getElementById("management_grade").value;
+                document.getElementById("management_grade_error").innerHTML = "";
+            }
+            
+            // Validating Email
+            if(ValidateEmail()) {
+                form_data.Email = document.getElementById("email_id").value.replaceAll(' ', '');
+                document.getElementById("email_error").innerHTML = "";
+            }
+            else{                
+                document.getElementById("email_error").innerHTML = "Please enter a valid email.";
+                Error_Flag = "Error";
+            }            	
+
+	        //window.alert(document.getElementById("business_industry").value);
+            // Validating Industry
+            if(document.getElementById("business_industry").value == "Select"){
+                document.getElementById("industry_error").innerHTML = "Please choose an option.";
+                Error_Flag = "Error";
+                 //window.alert("Doing a check here!!!!!!");
+            }
+            else{
+                form_data.Industry = document.getElementById("business_industry").value;
+                document.getElementById("industry_error").innerHTML = "";
+            }
+
+            // Validating the country
+            if(document.getElementById("business_country").value == "Select"){
+                document.getElementById("country_error").innerHTML = "Please choose an option.";
+                Error_Flag = "Error";
+                 //window.alert("Doing a check here!!!!!!");
+            }
+            else{
+                form_data.Business_Country = document.getElementById("business_country").value;
+                document.getElementById("country_error").innerHTML = "";
+            }
+
+            //Validating Username (Only Allowing Alphanumeric Names)
+            if(ValidateUsername()) {
+                form_data.Username = document.getElementById("username_id").value.replaceAll(' ', '');
+                document.getElementById("username_error").innerHTML = "";
+            }
+            else{                
+                document.getElementById("username_error").innerHTML = "Username should only be letters and numbers.";
+                Error_Flag = "Error";
+            }
+
+            // Check for a password match
+            if(document.getElementById("password_id").value != document.getElementById("password_id_again").value){
+                document.getElementById("password_error").innerHTML = "The passwords need to match.";
+                document.getElementById("password_error_again").innerHTML = "The passwords need to match.";
+                Error_Flag = "Error";
+            }
+            else{
+                document.getElementById("password_error").innerHTML = "";
+                document.getElementById("password_error_again").innerHTML = "";
+            }
+
+            // Checking for blanks (people who only put spaces) and flagging them.
+            if (voidOnlySpaces("company_name")) {
+                document.getElementById("company_nm_error").innerHTML = "Improper input. Try again.";
+                Error_Flag = "Error";
+            }
+            else {document.getElementById("company_nm_error").innerHTML = "";}
+
+            if (voidOnlySpaces("position_title")) {
+                document.getElementById("position_nm_error").innerHTML = "Improper input. Try again.";
+                Error_Flag = "Error";
+            }
+            else {document.getElementById("position_nm_error").innerHTML = "";}
+
+            if (voidOnlySpaces("phone_num")) {
+                document.getElementById("phone_num_error").innerHTML = "Improper input. Try again.";
+                Error_Flag = "Error";
+            }
+            else {document.getElementById("phone_num_error").innerHTML = "";}
+
+            if (voidOnlySpaces("business_address")) {
+                document.getElementById("address_error").innerHTML = "Improper input. Try again.";
+                Error_Flag = "Error";
+            }
+            else {document.getElementById("address_error").innerHTML = "";}
+
+            if (voidOnlySpaces("company_size")) {
+                document.getElementById("business_size_error").innerHTML = "Improper input. Try again.";
+                Error_Flag = "Error";
+            }
+            else {document.getElementById("business_size_error").innerHTML = "";}
+
+            if (voidOnlySpaces("business_revenue")) {
+                document.getElementById("revenue_error").innerHTML = "Improper input. Try again.";
+                Error_Flag = "Error";
+            }
+            else {document.getElementById("revenue_error").innerHTML = "";}
+
+            if (Error_Flag == "Error"){
+                document.getElementById("registration-success").style.color = 'red';
+                document.getElementById("registration-success").innerHTML = "Error"; 
+                return;
+            }
+            
+            /**************************************** Section End ***********************************/
+
+            form_data.Profile_ID = form_data.Email + "_" + form_data.Buyer_or_Supplier;
+            form_data.Company_Name = document.getElementById("company_name").value.trim();
+            form_data.Position_Title = document.getElementById("position_title").value.trim();
+            form_data.Phone = document.getElementById("phone_num").value.replaceAll(' ', '').trim();
+            form_data.Business_Address = document.getElementById("business_address").value.trim();
+            form_data.Business_Size = document.getElementById("company_size").value.trim();
+            form_data.Business_Revenue = document.getElementById("business_revenue").value.trim();
+            form_data.Password = document.getElementById("password_id").value;                      
+            
+            is_status_complete();	
+
+        });
+       
+    </script>
+    
+</body>
+</html>

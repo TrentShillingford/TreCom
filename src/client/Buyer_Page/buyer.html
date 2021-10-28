@@ -1,0 +1,301 @@
+<html>
+    <head>
+
+        <meta charset = "UTF-8">
+        <meta meta http-equiv="Content-Type" content="text/html">
+        <meta name="description" content="Welcome to a new eCommerce platform!">
+        <meta name="author" content="Trent Shillingford">
+        <meta name = "keywords" content = "Trecom, eCommerce, shopping">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0"> 
+        <link rel="shortcut icon" href="data:;base64,iVBORw0KGgo=">
+        <title>TreCom Website</title>
+
+        <!--Font for the Title-->
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet"> 
+
+        <!--Font for the form headers-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">  
+        
+        <!--Font for the navigation bar text-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet"> 
+        
+        <!--Custom CSS for the profile page (Using some from registration page)-->    
+        <link href="buyerStyle.css" rel="stylesheet">
+
+    </head>
+
+    <body>    
+        
+        <script>
+
+            window.addEventListener( "pageshow", function ( event ) {
+                var historyTraversal = event.persisted || 
+                                    ( typeof window.performance != "undefined" && 
+                                        window.performance.navigation.type === 2 );
+                if ( historyTraversal ) {
+                    // Handle page restore.
+                    window.location.reload();
+                }
+            });
+
+            //Startup procedure
+            async function startup(){
+                //retrieving the first page data for buyers
+                sessionStorage.setItem("action_item","get_buyers");
+                let response = await fetch('/buyers',{method:'POST', body: JSON.stringify(sessionStorage), headers:{'Content-Type' : 'application/json'}});
+                var data = await response.json();
+                document.getElementById("total_pages").innerHTML = data.pagelength;
+                if (sessionStorage.getItem('session_id') != null) {
+                    //Then show the profile option in the dropdown, change "login" to "logout", and hide the "register" option
+                    document.getElementById("profilepage_profilebuttondropdown").style.display = "";
+                    document.getElementById("login_profilebuttondropdown").innerHTML = "Logout";
+                    document.getElementById("register_profilebuttondropdown").style.display = "none";
+                }
+                display(data.content);
+            }
+
+            //Startup procedure
+            async function page_turn(direction){
+                //retrieving the first page data for buyers
+                sessionStorage.setItem("action_item","page_turn");
+                sessionStorage.setItem("page_num",(parseInt(document.getElementById("current_page").innerHTML) + 1).toString());
+                if(direction == "left"){sessionStorage.setItem("page_num",(parseInt(document.getElementById("current_page").innerHTML) - 1).toString());}                
+                let response = await fetch('/buyers',{method:'POST', body: JSON.stringify(sessionStorage), headers:{'Content-Type' : 'application/json'}});
+                var data = await response.json();
+                display(data);
+                document.getElementById("current_page").innerHTML = (parseInt(document.getElementById("current_page").innerHTML) + 1).toString();
+                if(direction == "left"){document.getElementById("current_page").innerHTML = (parseInt(document.getElementById("current_page").innerHTML) - 2).toString();}
+            }
+
+            async function display(page){
+
+                //clear the section
+                document.getElementById("entry_container").innerHTML="";  
+
+                if (Object.keys(page).length < 1){return;}
+
+                var computedStyle = window.getComputedStyle(document.getElementById("buyer-supplier-entry"));
+
+                Object.keys(page).forEach(element => {
+                    
+                    //get the current object in a section while iterating through keys
+                    var curr_obj = page[element.toString()];
+                    
+                    //clone the entry element and its style                  
+                    var ent = document.getElementById("buyer-supplier-entry").cloneNode(true);                            
+                    Array.from(computedStyle).forEach(key => ent.style.setProperty(key, computedStyle.getPropertyValue(key), computedStyle.getPropertyPriority(key))); 
+
+                    //Then change the display to flex
+                    ent.style.display = "flex";
+
+                    ent.addEventListener('mouseenter', event => {
+                        ent.style.borderColor = "rgba(255, 208, 0)";
+                    });
+
+                    ent.addEventListener('mousedown', event => {
+                        ent.style.borderColor = "orangered";
+                    });
+
+                    ent.addEventListener('mouseup', event => {
+                        if(ent.style.borderColor.split(" ")[0] == "orangered"){
+                            ent.style.borderColor = "rgba(255, 208, 0)";
+                            //do stuff here
+                            selected = JSON.stringify({
+                                "product_title": ent.querySelector("#entry-title").innerHTML,
+                                "product_photo": ent.querySelector("#entry_pic").src,
+                                "detail_description": ent.querySelector("#entry-description").innerHTML,
+                                "detail_location": ent.querySelector("#entry-location").innerHTML,
+                                "detail_shipping": ent.querySelector("#entry-shipping").innerHTML,
+                                "detail_contact": ent.querySelector("#entry-contact").innerHTML,
+                                "detail_company": ent.querySelector("#entry-company").innerHTML,
+                                "detail_size": ent.querySelector("#entry-size").innerHTML,
+                                "detail_revenue": ent.querySelector("#entry-revenue").innerHTML,
+                                "detail_email": ent.querySelector("#entry-email").innerHTML,
+                                "detail_phone": ent.querySelector("#entry-phone").innerHTML,
+                                "detail_username": ent.querySelector("#entry-username").innerHTML
+                            });
+                            sessionStorage.setItem("more_details",selected);
+                            location.assign("../Detail_Page/detail.html");
+                        }
+                    });
+
+                    ent.addEventListener('mouseleave', event => {
+                        ent.style.borderColor = "rgb(255, 225, 90)";
+                    });
+
+                    //Then fill in the details for the entry to display
+                    //This is the buyer page, so assign entry elements accordingly  
+                    ent.querySelector("#entry-email").innerHTML = curr_obj['email_id'];
+                    ent.querySelector("#entry-phone").innerHTML = curr_obj['phone_id'];
+                    ent.querySelector("#entry-company").innerHTML = curr_obj['company_name'];
+                    ent.querySelector("#entry-contact").innerHTML = JSON.parse(curr_obj['contact_name']).First_Name + " " + JSON.parse(curr_obj['contact_name']).Last_Name;               
+                    ent.querySelector("#entry-title").innerHTML = curr_obj['request_title'];
+                    ent.querySelector("#entry-location").innerHTML = curr_obj['location_request_from'];
+                    ent.querySelector("#entry-shipping").innerHTML = curr_obj['send_item_to'];
+                    ent.querySelector("#entry-description").innerHTML = curr_obj['request_text'];                        
+                    ent.querySelector("#entry-size").innerHTML = curr_obj['business_size'];
+                    ent.querySelector("#entry-revenue").innerHTML = curr_obj['business_revenue'];
+                    ent.querySelector("#entry-username").innerHTML = curr_obj['username'];
+                    ent.id = curr_obj['entry_id'];    
+                    
+                    // Here add the picture as an entry pic
+                    //'https://restcountries.eu/rest/v2/alpha/' + data.profile_info.business_country
+                    //let obj_co = await (await fetch('https://restcountries.eu/rest/v2/alpha/' + curr_obj['business_country'])).json();
+                    //var obj_co2 = "https://www.countryflags.io/" + curr_obj['business_country'] + "/flat/64.png"
+                    ent.querySelector("#entry_pic").src = "https://www.eworldtrade.com/2K19/flags/4x3/" + curr_obj['business_country'] + ".svg";
+                
+                    //Then check if the element is displayed                            
+                    document.getElementById("entry_container").append(ent);
+    
+                });
+ 
+            }
+
+        </script>
+        
+        <nav>
+            <div class="nav-spacing">
+                <span class="heading">TreCom</span>
+                <span class="nav-text">
+                    <b>                  
+                        <span class="navlink"><a href="#">About</a></span>
+                        <span class="navlink"><a href="../Home_Page/index.html">Home</a></span>
+                        <span class="navlink"><a href="../Buyer_Page/buyer.html">Buyers</a></span>
+                        <span class="navlink"><a href="../Supplier_Page/supplier.html">Suppliers</a></span>
+                    </b> 
+                    <a>
+                        <img src="/profile_pic_placeholder.png" onerror="this.src = '../../../src/server/Profile_Pictures/profile_pic_placeholder.png';" class="profilepicture profile_pic_hovering">
+                        <img src="/imageonline-co-invertedimage.png" onerror="this.src = '../../../src/server/Profile_Pictures/imageonline-co-invertedimage.png';" class="profilepictureinverted profile_pic_hovering">
+                        <div id="profile_dropdown" style="display: none">
+                            <div id="profilepage_profilebuttondropdown" class="profile_dropdown_options" style="display: none;">Profile</div>
+                            <div id="login_profilebuttondropdown" class="profile_dropdown_options">Login</div>
+                            <div id="register_profilebuttondropdown" class="profile_dropdown_options">Register</div>
+                        </div>
+                    </a>
+                </span>             
+            </div>
+        </nav>
+
+        <div id="listing-section">
+
+            <!--container for the entries from the entry manager-->
+            <div id="entry_container"></div>
+
+            <!-- this is beginning of a bolierplate entry-->
+            <div id="buyer-supplier-entry" style="margin-bottom: 30px;"> 
+                <div id="entry-photo"><img id="entry_pic" src="/item-placeholder.png" onerror="this.src = '../../../src/server/Profile_Pictures/item-placeholder.png';" style="width:200px; height: 200px;"></div>
+                <div id="item_details">
+                    <div class="buyer-supplier-container" style="display: flex;">
+                        <div style="margin-left: 10px; margin-top:10px; margin-bottom:-5px;"><h2 id="entry-title" style="display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;">Product Title</h2></div>
+                    </div>
+                    <div class="buyer-supplier-container" style="display: flex;">
+                        <div style="margin-left: 10px; font-size: 12px; width: 235px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;">Location: <span id="entry-location">United States of America</span></div>
+                        <div style="margin-left: 5px; font-size: 12px; width: 162px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;">Ship To: <span id="entry-shipping">Everywhere</span></div>
+                    </div>    
+                    <div class="buyer-supplier-container" style="display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden;">
+                        <div style="margin-left: 10px; margin-top:10px; font-size: 12px;">Description: <span id="entry-description">This product is an item</span></div>
+                    </div>
+                </div>
+                <div id="vl"></div>
+
+                <div id="user-info">                        
+                    <p class="user-overflow">Company: <span id="entry-company">Staples .Inc</span></p> 
+                    <p class="user-overflow">Size: <span id="entry-size">500-700</span></p>
+                    <p class="user-overflow">Revenue: <span id="entry-revenue">$500k-$700k</span></p>
+                    <p class="user-overflow">Contact: <span id="entry-contact">Trent Shillingford</span></p>
+                    <p class="user-overflow">Username: @<span id="entry-username">Tshill22</span></p>
+                    <p class="user-overflow">Email: <span id="entry-email">tshillingford1@gmail.com</span></p>
+                    <p class="user-overflow">Phone: <span id="entry-phone">845-694-9017</span></p>
+                </div>
+            </div>
+            <!-- end of boilerplate entry -->
+
+            <div id="navigation_pad" style="position: relative; bottom: 0; margin-top: 30px; padding-top: 50px;">
+
+                <!--arrow buttons-->
+                <div style="margin-bottom: 5px; margin-left: 435px; display: flex;">
+                    <!--button for previous page-->
+                    <span style="cursor: pointer;">
+                        <img id="previous_page" src="/left_arrow.png" onerror="this.src = '../../../src/server/Profile_Pictures/left_arrow.png';" class="page_arrows">
+                    </span>
+
+                    <div style="min-width: 30px;"></div>
+
+                    <!--button for next page-->
+                    <span style="cursor: pointer;">
+                        <img id="next_page" src="/right_arrow.png" onerror="this.src = '../../../src/server/Profile_Pictures/right_arrow.png';" class="page_arrows">
+                    </span>
+                </div>
+
+                <!--page tracker-->
+                <div style="margin-left: 17px; margin-bottom: 10px; font-family:'Noto Sans JP',sans-serif;">
+                    <span id="current_page">1</span> of <span id="total_pages">1</span>
+                </div>        
+
+            </div>
+
+        </div>
+
+        <script>
+
+            //Adding event listeners for turning the page
+            document.getElementById("previous_page").addEventListener("click",function(event){    
+                // If we are on the beginning page of the profile, we cannot move further back
+                if(document.getElementById("current_page").innerHTML == "1"){return;}
+                page_turn("left");
+            });
+
+            document.getElementById("next_page").addEventListener("click",function(event){    
+                // If we are on the last page, as indicated by total # of pages equivalent to the current page, we cannot move further foward
+                if(document.getElementById("current_page").innerHTML == document.getElementById("total_pages").innerHTML){return;}
+                page_turn("right");
+            });
+
+            document.querySelectorAll('.profile_pic_hovering').forEach(item => {
+                item.addEventListener('mouseover', event => {
+                    document.getElementById("profile_dropdown").style.display = "";
+                });
+            });
+
+            document.getElementById("profile_dropdown").addEventListener("mouseleave",function(event){    
+                document.getElementById("profile_dropdown").style.display = "none";
+            });
+
+
+            document.getElementById("profilepage_profilebuttondropdown").addEventListener("click",function(event){    
+                //link to the profile page
+                location.assign("../Profile-Page/profile.html");
+            });
+
+            document.getElementById("login_profilebuttondropdown").addEventListener("click",function(event){    
+                //if the logout option is there, then clear, otherwise, send to login page
+                if(document.getElementById("login_profilebuttondropdown").innerHTML == "Logout"){
+                    //clear the sesstion storage and reload the page; this will remove all user info
+                    sessionStorage.clear();
+                    location.reload(); 
+                    //location.assign("../Supplier_Page/supplier.html");
+                    return;
+                }
+                //if one needs to log in, send them to the login page
+                location.assign("../Login_Page/Login.html");                
+            });
+
+            document.getElementById("register_profilebuttondropdown").addEventListener("click",function(event){    
+                //send to the registration page
+                location.assign("../Registration-Section/Registration.html");
+            });
+
+            //Starting up the system
+            startup();
+        </script>
+    
+    </body>
+
+</html>

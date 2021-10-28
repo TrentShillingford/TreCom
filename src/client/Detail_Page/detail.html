@@ -1,0 +1,151 @@
+<html>
+    <head>
+
+        <meta charset = "UTF-8">
+        <meta meta http-equiv="Content-Type" content="text/html">
+        <meta name="description" content="Welcome to a new eCommerce platform!">
+        <meta name="author" content="Trent Shillingford">
+        <meta name = "keywords" content = "Trecom, eCommerce, shopping">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0"> 
+        <link rel="shortcut icon" href="data:;base64,iVBORw0KGgo=">
+        <title>TreCom Website</title>
+
+        <!--Font for the Title-->
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet"> 
+
+        <!--Font for the form headers-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">  
+        
+        <!--Font for the navigation bar text-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet"> 
+        
+        <!--Custom CSS for the profile page (Using some from registration page)-->    
+        <link href="detailStyle.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <script>
+
+            window.addEventListener( "pageshow", function ( event ) {
+                var historyTraversal = event.persisted || 
+                                    ( typeof window.performance != "undefined" && 
+                                        window.performance.navigation.type === 2 );
+                if ( historyTraversal ) {
+                    // Handle page restore.
+                    window.location.reload();
+                }
+            });
+
+            //Startup procedure
+            function startup(){
+                if (sessionStorage.getItem('session_id') != null) {
+                    //Then show the profile option in the dropdown, change "login" to "logout", and hide the "register" option
+                    document.getElementById("profilepage_profilebuttondropdown").style.display = "";
+                    document.getElementById("login_profilebuttondropdown").innerHTML = "Logout";
+                    document.getElementById("register_profilebuttondropdown").style.display = "none";
+                }
+                let incoming_detail = JSON.parse(sessionStorage.getItem("more_details"));
+                document.getElementById("product_title").innerHTML = incoming_detail.product_title;
+                document.getElementById("product_photo").src = incoming_detail.product_photo;
+                document.getElementById("detail_description").innerHTML = incoming_detail.detail_description;
+                document.getElementById("detail_location").innerHTML = incoming_detail.detail_location;
+                document.getElementById("detail_shipping").innerHTML = incoming_detail.detail_shipping;
+                document.getElementById("detail_contact").innerHTML = incoming_detail.detail_contact;
+                document.getElementById("detail_company").innerHTML = incoming_detail.detail_company;
+                document.getElementById("detail_size").innerHTML = incoming_detail.detail_size;
+                document.getElementById("detail_revenue").innerHTML = incoming_detail.detail_revenue;
+                document.getElementById("detail_email").innerHTML = incoming_detail.detail_email;
+                document.getElementById("detail_phone").innerHTML = incoming_detail.detail_phone;
+                document.getElementById("detail_username").innerHTML = incoming_detail.detail_username;
+            }
+
+        </script>
+
+        <nav>
+            <div class="nav-spacing">
+                <span class="heading">TreCom</span>
+                <span class="nav-text">
+                    <b>                  
+                    <span class="navlink"><a href="#">About</a></span>
+                    <span class="navlink"><a href="../Home_Page/index.html">Home</a></span>
+                    <span class="navlink"><a href="../Buyer_Page/buyer.html">Buyers</a></span>
+                    <span class="navlink"><a href="../Supplier_Page/supplier.html">Suppliers</a></span>
+                    </b> 
+                    <a>
+                        <img src="/profile_pic_placeholder.png" onerror="this.src = '../../../src/server/Profile_Pictures/profile_pic_placeholder.png';" class="profilepicture profile_pic_hovering">
+                        <img src="/imageonline-co-invertedimage.png" onerror="this.src = '../../../src/server/Profile_Pictures/imageonline-co-invertedimage.png';" class="profilepictureinverted profile_pic_hovering">
+                        <div id="profile_dropdown" style="display: none">
+                            <div id="profilepage_profilebuttondropdown" class="profile_dropdown_options" style="display: none;">Profile</div>
+                            <div id="login_profilebuttondropdown" class="profile_dropdown_options">Login</div>
+                            <div id="register_profilebuttondropdown" class="profile_dropdown_options">Register</div>
+                        </div>
+                    </a>
+                </span>             
+            </div>
+        </nav>
+
+        <div id="entry-section">
+            <div id="product_title">Product Title</div>
+            <img id="product_photo" src='../../../src/server/Profile_Pictures/item-placeholder.png' onerror="this.src ='/item-placeholder.png'">
+            <div class="product_description">Description: <span id="detail_description">Something Here</span></div>
+            <div class="product_description">Location: <span id="detail_location">Something Here</span></div>
+            <div class="product_description">Shipping: <span id="detail_shipping">Something Here</span></div>
+            <div class="product_description">Contact: <span id="detail_contact">Something Here</span></div>
+            <div class="product_description">Company: <span id="detail_company">Something Here</span></div>
+            <div class="product_description">Size: <span id="detail_size">0</span> Employees</div>
+            <div class="product_description">Revenue: <span id="detail_revenue">Something Here</span></div>
+            <div class="product_description">Email: <span id="detail_email">Something Here</span></div>
+            <div class="product_description">Phone: <span id="detail_phone">Something Here</span></div>
+            <div class="product_description">Username: @<span id="detail_username">Something Here</span></div>
+        </div>
+
+        <script>
+            document.querySelectorAll('.profile_pic_hovering').forEach(item => {
+                item.addEventListener('mouseover', event => {
+                    document.getElementById("profile_dropdown").style.display = "";
+                });
+            });
+
+            document.getElementById("profile_dropdown").addEventListener("mouseleave",function(event){    
+                document.getElementById("profile_dropdown").style.display = "none";
+            });
+
+
+            document.getElementById("profilepage_profilebuttondropdown").addEventListener("click",function(event){    
+                //link to the profile page
+                location.assign("../Profile-Page/profile.html");
+            });
+
+            document.getElementById("login_profilebuttondropdown").addEventListener("click",function(event){    
+                //if the logout option is there, then clear, otherwise, send to login page
+                if(document.getElementById("login_profilebuttondropdown").innerHTML == "Logout"){
+                    //clear the sesstion storage and reload the page; this will remove all user info
+                    sessionStorage.clear();
+                    //location.reload(); 
+                    location.replace("../Home_Page/index.html");
+                    return;
+                }
+                //if one needs to log in, send them to the login page
+                location.assign("../Login_Page/Login.html");                
+            });
+
+            document.getElementById("register_profilebuttondropdown").addEventListener("click",function(event){    
+                //send to the registration page
+                location.assign("../Registration-Section/Registration.html");
+            });
+
+            //Starting up the system
+            startup();
+        </script>
+
+    </body>
+</html>
